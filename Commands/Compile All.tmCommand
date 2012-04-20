@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env node
+
+var util = require("util");
+var exec = require('child_process').exec;
+var fs = require('fs');
+var env = process.env;
+
+var printExec = function (error, stdout, stderr) {
+	if (stdout) {
+		util.puts(stdout);
+	} else if (stderr) {
+		util.puts(stderr);
+	} else if (error !== null) {
+		util.puts(error);
+	}
+};
+
+if (env.TM_PROJECT_DIRECTORY &amp;&amp; env.GSS_MAKE_COMMAND) {
+	exec('cd ' + env.TM_PROJECT_DIRECTORY + ' &amp;&amp; make ' + env.GSS_MAKE_COMMAND, printExec);
+}
+</string>
+	<key>input</key>
+	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>@C</string>
+	<key>name</key>
+	<string>Compile All</string>
+	<key>output</key>
+	<string>showAsTooltip</string>
+	<key>scope</key>
+	<string>source.gss</string>
+	<key>uuid</key>
+	<string>C7665AFE-EAF5-46AA-A1E2-E30C1F9C3257</string>
+</dict>
+</plist>
